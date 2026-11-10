@@ -1,5 +1,4 @@
 import * as cheerio from "cheerio";
-
 const response = await fetch(
 	"https://store.steampowered.com/search/?hwtype=0&supportedlang=english&ndl=1"
 );
@@ -9,11 +8,10 @@ const html = await response.text();
 const scrape = cheerio.load(html);
 
 //- forklaring på koden for loggen; så a.search_.... betyr finn en anchor tag (<a>) i siden som inneholder classe navnet search_result...
-
 scrape("a.search_result_row").each((i, row) => {
 	const gameTitle = scrape(".title", row).text().trim();
+	//! .text og trim gir alt texten fra html og uten whitespaes
 
-	// Extract price details from the discount block inside each row
 	const discountBlock = scrape(".discount_block", row);
 	const discountPct = scrape(".discount_pct", discountBlock)
 		.text()
@@ -31,6 +29,7 @@ scrape("a.search_result_row").each((i, row) => {
 		.text()
 		.trim();
 
+	//* skriv ut på terminalen:
 	if (gameTitle) {
 		console.log(`Game: ${gameTitle}`);
 		if (finalPrice) {
