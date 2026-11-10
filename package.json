@@ -1,0 +1,23 @@
+{
+  "name": "webscrape",
+  "version": "1.0.0",
+  "description": "- Language: JavaScript - Tool : Cheerio",
+  "homepage": "https://github.com/Blazey485/WebScraping#readme",
+  "bugs": {
+    "url": "https://github.com/Blazey485/WebScraping/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Blazey485/WebScraping.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "cheerio": "^1.2.0"
+  }
+}
