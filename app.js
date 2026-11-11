@@ -1,4 +1,5 @@
 import * as cheerio from "cheerio";
+
 const response = await fetch(
 	// Lenke på nettsiden/siden du vil scrape.
 	"https://store.steampowered.com/search/?hwtype=0&supportedlang=english&ndl=1"

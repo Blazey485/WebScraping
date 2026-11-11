@@ -19,3 +19,9 @@ Puppeteer fungerer bare på Chrome noe som jeg ikke bruker ofte, og den bruker 1
 Info om cheerio :
 Rask, opp til 100 nettsider i sekunder
 Det eneste cons jeg ser et at den ikke klarer å se HTML som er injecta av JS, så alt av client side rendering nettsider vil ikke funke. Så jeg må finne SSR (server side redenring ) nettsider.
+
+# to run Playwright>
+
+    ```bash
+     npx playwright codegen --browser firefox https://www.wikipedia.org
+     ```
