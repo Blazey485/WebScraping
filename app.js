@@ -1,11 +1,26 @@
 import * as cheerio from "cheerio";
+import { chromium } from "playwright";
 
-const response = await fetch(
-	// Lenke på nettsiden/siden du vil scrape.
-	"https://store.steampowered.com/search/?hwtype=0&supportedlang=english&ndl=1"
+const browser = await chromium.launch({ headless: true });
+const page = await browser.newPage();
+
+await page.goto(
+	"https://store.steampowered.com/search/?hwtype=0&supportedlang=english&ndl=1",
+	{ waitUntil: "domcontentloaded" }
 );
 
-const html = await response.text();
+try {
+	await page
+		.getByRole("button", {
+			name: "Accept All",
+			exact: true
+		})
+		.click({ timeout: 3000 });
+} catch {}
+
+await page.waitForSelector("a.search_result_row");
+
+const html = await page.content();
 
 const scrape = cheerio.load(html);
 
@@ -31,7 +46,6 @@ scrape("a.search_result_row").each((i, row) => {
 		.text()
 		.trim();
 
-	//* skriv ut på terminalen:
 	if (gameTitle) {
 		console.log(`Game: ${gameTitle}`);
 		if (finalPrice) {
@@ -42,3 +56,5 @@ scrape("a.search_result_row").each((i, row) => {
 		console.log("                 ");
 	}
 });
+
+await browser.close();
